@@ -4,16 +4,14 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-        PHOTOS
+        Admin
             <small>Subheading</small>
         </h1>
         <?php 
-
           $users = User::find_all_users();
           foreach($users as $user){
             echo $user->username; 
           }
-
         ?>
 
 
@@ -31,8 +29,6 @@
             // $user->last_name=$found_user['last_name'];
 
             echo $user->username;
-
-
         ?>
 
         <?php

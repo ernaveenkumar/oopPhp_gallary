@@ -1,5 +1,12 @@
 
 <?php include('init.php'); ?>
+<?php 
+    // if(!$session->is_signed_id()){
+
+    // }else{
+    //     redirect('login.php');
+    // }
+?>
 <!DOCTYPE html>
 <html lang="en">
 

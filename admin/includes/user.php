@@ -11,14 +11,14 @@ class User{
 
   public static function find_all_users(){
 
-    global $database;
+    //global $database;
     $result_set = self::find_this_query("select * from users");
     //$result_set = $database->query("select * from users");
     return $result_set;
   }
 
   public static function find_user_by_id($user_id){
-    global $database;
+    //global $database;
     $the_result_array = self::find_this_query("select * from users where id = $user_id Limit 1");
 
     return !empty($the_result_array) ? array_shift($the_result_array) : false;
@@ -36,6 +36,26 @@ class User{
     }
     
     return $the_object_array;
+  }
+
+  public static function verify_user($username, $password){
+    // database object
+    global $database;
+    $username = $database->escape_string($username);
+    $password = $database->escape_string($password);
+
+    //echo "user is ". $username. " pass is ". $password;
+    //die();
+   
+
+    $sql = "SELECT * FROM USERS WHERE ";
+    $sql .= "username = '{$username}'";
+    $sql .= "AND password = '{$password}'";
+    $sql .= "LIMIT 1";
+    
+    $the_result_array = self::find_this_query($sql);
+    return !empty($the_result_array)? array_shift($the_result_array):false;
+    
   }
 
   public static function instantation($the_record){

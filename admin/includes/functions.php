@@ -9,3 +9,8 @@ spl_autoload_register(function($class) {
     die("This file name {$class}.php was not man");
   }
 });
+
+function redirect($location){
+
+  header("Location: $location");
+}
