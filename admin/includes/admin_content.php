@@ -9,18 +9,23 @@
           </h1>
 
         <?php
+          // Create new user
           // $user = new User();
-          // $user->username = "Example_username";
-          // $user->password = "pass123";
-          // $user->first_name = "John_firstname";
-          // $user->last_name = "Doe_lastname";
+          // $user->username = "Student 1";
+          // $user->password = "studentpass123";
+          // $user->first_name = "student_firstname";
+          // $user->last_name = "student_lastname";
           // $user->create();
 
-          $user = User::find_user_by_id(4);
-          $user->last_name = "SIT";
-          $user->save();
+          //Update
+          // $user = User::find_user_by_id(5);
+          // $user->username = "David145";
+          // $user->password = "david1989";
+          // $user->first_name = "David";
+          // $user->last_name = "Wiiliams";
+          // $user->save();
 
-          
+          //Delete a user
           //$user = User::find_user_by_id(3);
           //$user->delete();
 
