@@ -9,12 +9,12 @@
           </h1>
 
         <?php
-          // Create new user
+
           // $user = new User();
-          // $user->username = "Student 1";
-          // $user->password = "studentpass123";
-          // $user->first_name = "student_firstname";
-          // $user->last_name = "student_lastname";
+          // $user->username = "Student 2";
+          // $user->password = "student2pass123";
+          // $user->first_name = "student2_firstname";
+          // $user->last_name = "student2_lastname";
           // $user->create();
 
           //Update
@@ -35,28 +35,41 @@
 
 
         <?php 
-          $users = User::find_all_users();
+          $users = User::find_all();
           foreach($users as $user){
             echo $user->username; 
           }
         ?>
 
+        <?php
+            echo "-----------------";
+            $found_user = User::find_by_id(1);
+            $user = User::instantation($found_user);
 
-          <?php
-              echo "-----------------";
-              $found_user = User::find_user_by_id(1);
-              $user = User::instantation($found_user);
+            //echo $found_user['username'];
+            // $user = new User();
+            // $user->id = $found_user['id'];
+            // $user->username=$found_user['username'];
+            // $user->password=$found_user['password'];
+            // $user->first_name=$found_user['first_name'];
+            // $user->last_name=$found_user['last_name'];
 
-              //echo $found_user['username'];
-              // $user = new User();
-              // $user->id = $found_user['id'];
-              // $user->username=$found_user['username'];
-              // $user->password=$found_user['password'];
-              // $user->first_name=$found_user['first_name'];
-              // $user->last_name=$found_user['last_name'];
+            echo $user->username;
+        ?>
 
-              echo $user->username;
-          ?>
+      <?php 
+          $photo = new Photo();
+          $photo->photo_title = "Photo 2";
+          $photo->photo_description = "Photo Desc";
+          $photo->create();
+        ?>
+
+        <?php 
+          $photos = Photo::find_all();
+          foreach($photos as $photo){
+            echo $photo->photo_title; 
+          }
+        ?>
 
           <?php
 
