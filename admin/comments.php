@@ -1,5 +1,28 @@
 <?php include("includes/header.php"); ?>
 
+
+<?php
+    if(!$session->is_signed_in())
+    {
+        redirect('login.php');
+    }
+
+
+
+
+    //$comments = Comment::find_all();
+    if(isset($_GET['id'])){
+      $photoId = $_GET['id'];
+      $comments = Comment::find_the_comments($photoId);
+    }else{
+      $comments = Comment::find_the_comments(); //[]
+    }
+   
+    // $uObj = new User(); 
+    // $user_image_path = $uObj->picture_path();
+    // $user_image_placeholder = $uObj->image_place_holder();
+    //die($user_image_path);
+?>
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -27,18 +50,50 @@
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">
-                        COMMENTS
-                            <small>Subheading</small>
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">COMMENTS</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-file"></i> COMMENTS
-                            </li>
-                        </ol>
+       
+
+                        <div class="col-md-12">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Comment Id</th>
+                                        <th>Photo Id</th>
+                                        <th>Author</th>
+                                        <th>description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                    
+                                    if (empty($comments)) {
+                                        echo "<tr><td>No comment found</td></tr>";
+                                    } else{
+
+                                    
+                                    foreach($comments as $comment) :?>
+                                        <!-- https://place-hold.it/62x62 -->
+                                    <tr>
+                                        <td>
+                                          
+                                                <div class="action_links">
+                                                <a href="delete_comment.php?id=<?php echo $comment->id; ?>">Delete</a>
+                                                <a href="edit_comment.php?id=<?php echo $comment->id; ?>">Edit</a>
+                                                <a href="comment.php?id=<?php echo $comment->photo_id ?>">View</a>
+                                            </div>
+
+                                        </td>
+                                        
+                                        <td><?php echo $comment->id; ?></td>
+                                        <td><?php echo $comment->photo_id; ?></td>
+                                        <td><?php echo $comment->author; ?></td>
+                                        <td><?php echo $comment->body; ?></td>
+                                       
+                                    </tr>
+                                    <?php endforeach; }?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <!-- /.row -->

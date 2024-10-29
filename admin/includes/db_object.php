@@ -2,34 +2,23 @@
 
 class Db_object{
 
-  protected static $db_table = "users";
-
-  // protected static $db_table = "photos";
-  // protected static $db_table_fields = array ('username', 'password', 'first_name', 'last_name');
-  // public $id;
-  // public $title;
-  // public $description;
-  // public $filename;
-  // public $last_name;
-
-  // public $type;
-  // public $size;
-  // public $tmp_path;
-
-  // public $upload_directory = 'images';
-  // public $custom_errors_arry = array();
-
-  public $uploads_errors = array(
-    UPLOAD_ERR_OK           => "There is no error",
-    UPLOAD_ERR_INI_SIZE     => "The uploaded file exceeds the upload_max_filesize",
-    UPLOAD_ERR_FORM_SIZE    => "The uploaded file exceeds the MAX_FILE_SIZE",
-    UPLOAD_ERR_PARTIAL      => "The uploaded file was partially uploaded",
-    UPLOAD_ERR_NO_FILE      => "No file was uploaded",
-    UPLOAD_ERR_NO_TMP_DIR   => "Missing a temporary folder",
-    UPLOAD_ERR_CANT_WRITE   => "Failed to write file to disk",
-    UPLOAD_ERR_EXTENSION    => "A PHP extension stopped the file upload",
-  );
-
+  //protected static $db_table = "users";
+  public $errors = array();
+  // public $upload_errors_array = array(
+  
+  
+  //   UPLOAD_ERR_OK           => "There is no error",
+  //   UPLOAD_ERR_INI_SIZE		=> "The uploaded file exceeds the upload_max_filesize directive in php.ini",
+  //   UPLOAD_ERR_FORM_SIZE    => "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form",
+  //   UPLOAD_ERR_PARTIAL      => "The uploaded file was only partially uploaded.",
+  //   UPLOAD_ERR_NO_FILE      => "No file was uploaded.",               
+  //   UPLOAD_ERR_NO_TMP_DIR   => "Missing a temporary folder.",
+  //   UPLOAD_ERR_CANT_WRITE   => "Failed to write file to disk.",
+  //   UPLOAD_ERR_EXTENSION    => "A PHP extension stopped the file upload."					
+                          
+  
+  // );
+  # Late static binding
   public static function find_all(){
 
     //global $database;
@@ -38,9 +27,9 @@ class Db_object{
     return $result_set;
   }
 
-  public static function find_by_id($user_id){
+  public static function find_by_id($id){
     //global $database;
-    $the_result_array = static::find_this_query(" select * from ". static::$db_table ." where id = $user_id Limit 1");
+    $the_result_array = static::find_this_query(" select * from ". static::$db_table ." where id = $id Limit 1");
 
     return !empty($the_result_array) ? array_shift($the_result_array) : false;
     
@@ -62,6 +51,7 @@ class Db_object{
   public static function instantation($the_record){
 
 
+    #instantiate the calling class
     $calling_class = get_called_class();
     $the_object = new $calling_class;
     //$the_object = new static;
@@ -175,5 +165,17 @@ class Db_object{
     return $properties;
   }
 
+
+  public static function count_all(){
+
+    global $database;
+    $sql = "SELECT COUNT(*) FROM ". static::$db_table;
+    $result_set = $database->query($sql);
+
+    $row = mysqli_fetch_array($result_set);
+
+    return array_shift($row);
+
+  }
 
 }

@@ -3,11 +3,13 @@
 class Photo extends Db_object{
 
     protected static $db_table = "photos";
-    protected static $db_table_fields = array ('photo_id', 'photo_title', 'photo_description', 'filename', 'type','size');
-    public $photo_id;
-    public $photo_title;
-    public $photo_description;
+    protected static $db_table_fields = array ('id', 'title', 'caption', 'description', 'filename', 'alternate_text', 'type','size');
+    public $id;
+    public $title;
+    public $caption;
+    public $description;
     public $filename;
+    public $alternate_text;
 
     public $type;
     public $size;
@@ -15,11 +17,21 @@ class Photo extends Db_object{
 
     public $upload_directory = 'images';
     public $errors = [];
+    #    /*https://www.php.net/manual/en/features.file-upload.errors.php*/
+    public $upload_errors_array = array(
+
+
+      UPLOAD_ERR_OK           => "There is no error",
+      UPLOAD_ERR_INI_SIZE		=> "The uploaded file exceeds the upload_max_filesize directive in php.ini",
+      UPLOAD_ERR_FORM_SIZE    => "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form",
+      UPLOAD_ERR_PARTIAL      => "The uploaded file was only partially uploaded.",
+      UPLOAD_ERR_NO_FILE      => "No file was uploaded.",               
+      UPLOAD_ERR_NO_TMP_DIR   => "Missing a temporary folder.",
+      UPLOAD_ERR_CANT_WRITE   => "Failed to write file to disk.",
+      UPLOAD_ERR_EXTENSION    => "A PHP extension stopped the file upload."	
+    );
     public  $target_path;
     public $picture_path;
-
-
-    public function upload_errors_array(){}
 
     //$_FILES['uploaded_file] is passed to the set_file($file) argument
     public function set_file($file){
@@ -50,7 +62,7 @@ class Photo extends Db_object{
     }
     public function save(){
 
-      if($this->photo_id){
+      if($this->id){
         $this->update();
       }else{
         if(!empty($this->errors)){
@@ -81,9 +93,16 @@ class Photo extends Db_object{
           return false;
         }
       }
+
     }
-    
-  
 
+    public function delete_photo(){
 
+      if($this->delete()){
+
+        $target_path = SITE_ROOT. DS . 'admin' . DS . $this->upload_directory . DS. $this->filename;
+        return unlink($target_path) ? true : false;
+        //die($target_path);
+      }
+    }
 }

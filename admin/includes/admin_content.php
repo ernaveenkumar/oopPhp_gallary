@@ -7,74 +7,109 @@
           Admin
               <small>Subheading</small>
           </h1>
+          <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-users fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge"><?php echo $session->count; ?></div>
+                                        <div>New Views</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                     <div>Page View from Gallery</div>
+                                  <span class="pull-left">View Details</span> 
+                               <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span> 
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
 
-        <?php
-
-          // $user = new User();
-          // $user->username = "Student 2";
-          // $user->password = "student2pass123";
-          // $user->first_name = "student2_firstname";
-          // $user->last_name = "student2_lastname";
-          // $user->create();
-
-          //Update
-          // $user = User::find_user_by_id(5);
-          // $user->username = "David145";
-          // $user->password = "david1989";
-          // $user->first_name = "David";
-          // $user->last_name = "Wiiliams";
-          // $user->save();
-
-          //Delete a user
-          //$user = User::find_user_by_id(3);
-          //$user->delete();
-
-        ?>
-
-
+                     <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-photo fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge"><?php echo Photo::count_all(); ?></div>
+                                        <div>Photos</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="photos.php">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Total Photos in Gallery</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
 
 
-        <?php 
-          $users = User::find_all();
-          foreach($users as $user){
-            echo $user->username; 
-          }
-        ?>
+                     <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-user fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge"><?php echo User::count_all(); ?>
 
-        <?php
-            echo "-----------------";
-            $found_user = User::find_by_id(1);
-            $user = User::instantation($found_user);
+                                        </div>
+                                        <div>Users</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="users.php">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Total Users</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
 
-            //echo $found_user['username'];
-            // $user = new User();
-            // $user->id = $found_user['id'];
-            // $user->username=$found_user['username'];
-            // $user->password=$found_user['password'];
-            // $user->first_name=$found_user['first_name'];
-            // $user->last_name=$found_user['last_name'];
+                      <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-support fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge"><?php echo Comment::count_all(); ?></div>
+                                        <div>Comments</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="comments.php">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Total Comments</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
 
-            echo $user->username;
-        ?>
 
-      <?php 
-          $photo = new Photo();
-          $photo->photo_title = "Photo 2";
-          $photo->photo_description = "Photo Desc";
-          $photo->create();
-        ?>
-
-        <?php 
-          $photos = Photo::find_all();
-          foreach($photos as $photo){
-            echo $photo->photo_title; 
-          }
-        ?>
-
-          <?php
-
-            //$picture = new Picture(); //check the role of autoloading
-          ?>
+          </div> <!--First Row-->
+          <div class="row">
+          <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+          </div>
+       
       </div>
   </div>
   <!-- /.row -->

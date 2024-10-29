@@ -40,7 +40,7 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">
                         PHOTOS
-                            <small>Subheading</small>
+                            <small></small>
                         </h1>
 
                         <div class="col-md-12">
@@ -48,7 +48,7 @@
                                 <thead>
                                     <tr>
                                         <th>Photo</th>
-                                        <th>Id</th>
+                                        <th>id</th>
                                         <th>File Name</th>
                                         <th>Title</th>
                                         <th>Size</th>
@@ -60,11 +60,29 @@
                                     <tr>
                                         <td>
                                           
-                                            <img src="<?php echo $picture_path.$photo->filename; ?>" alt="Title missing">
+                                            <img src="<?php echo $picture_path.$photo->filename; ?>" alt="Title missing" class="admin-photo-thumbnail">
+                                            <div class="pictures_link">
+                                                <a href="delete_photo.php?id=<?php echo $photo->id; ?>">Delete</a>
+                                                <a href="edit_photo.php?id=<?php echo $photo->id; ?>">Edit</a>
+                                                <a href="#">View</a>
+                                                <?php $count_comments = Comment::find_the_comments($photo->id);?>
+                                        
+                                                <?php if(count($count_comments) >= 1):?>
+                                                <a href="comments.php?id=<?php echo $photo->id; ?>">View Comment (<?php 
+                                                echo count($count_comments); ?>)</a>
+                                                <?php else: ?>
+                                                     <a href="#">No Comment (<?php 
+                                                echo count($count_comments); ?>)</a>
+                                                <?php endif; ?>
+                                                <span> | </span>
+                                                <a href="comment.php?id=<?php echo $photo->id; ?>"> add comment </a>
+
+                                            </div>
+
                                         </td>
-                                        <td><?php echo $photo->photo_id; ?></td>
+                                        <td><?php echo $photo->id; ?></td>
                                         <td><?php echo $photo->filename; ?></td>
-                                        <td><?php echo $photo->photo_title; ?></td>
+                                        <td><?php echo $photo->title; ?></td>
                                         <td><?php echo $photo->size; ?></td>
                                     </tr>
                                     <?php endforeach;?>
