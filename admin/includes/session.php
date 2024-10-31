@@ -7,6 +7,7 @@
     public $message = "";
     public $count;
 
+
     function __construct(){
       session_start();
       $this->visitor_count();
@@ -33,7 +34,7 @@
       if(!empty($msg)){
         $_SESSION['message'] = $msg;
       }else{
-        return $this->message();
+        return $this->message;
       }
     }
     public function check_message(){
@@ -42,7 +43,7 @@
         unset($_SESSION['message']);
       
       }else{
-        $this->message = "";
+        return $this->message = "";
       }
     }
 
@@ -80,3 +81,4 @@
   }
 
   $session = new Session();
+  $message = $session->message();

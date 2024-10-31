@@ -15,8 +15,8 @@ $sql .= "OFFSET {$paginate->offset()}";
 $photos = Photo::find_this_query($sql); ?>
 
 <?php   
-    $pObj = new Photo(); 
-    $picture_path = $pObj->picture_path();
+    //$pObj = new Photo(); 
+    $picture_path = Photo::picture_path();
 ?>
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -54,7 +54,7 @@ $photos = Photo::find_this_query($sql); ?>
 
                             <div class="col-xs-6 col-md-3">
                                 <a href="comment.php?id=<?php echo $photo->id; ?>" class="img-thumbnail">
-                                    <img src="<?php echo $picture_path.$photo->filename?>" alt="" class="img-fluid home_page_photo">
+                                    <img src="<?php echo $picture_path."".$photo->filename?>" alt="" class="img-fluid home_page_photo">
                                 </a>
                             </div>
 

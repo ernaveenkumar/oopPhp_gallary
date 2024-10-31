@@ -10,5 +10,5 @@
   }
 
   if(isset($_POST['photo_id'])){
-    echo "Received ". $_POST['photo_id'];
+    echo Photo::displa_sidebar_data($_POST['photo_id']);
   }

@@ -20,7 +20,9 @@
     //die;
     
     if($comment){
+      
       $comment->delete();
+      $session->message("The comment  with {$comment->id} has been deleted.");
       redirect("comments.php?id={$comment->photo_id}");
     }else{
       redirect("comments.php?id={$comment->photo_id}");

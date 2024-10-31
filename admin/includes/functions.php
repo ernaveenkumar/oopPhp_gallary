@@ -12,5 +12,12 @@ spl_autoload_register(function($class) {
 
 function redirect($location){
 
-  header("Location: $location");
+  //header("Location: $location");
+  header("Location: {$location}");
+}
+
+function output_message($message) {
+
+  return $message;
+  
 }

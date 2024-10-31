@@ -11,8 +11,8 @@
       redirect("photos.php");
     }else{
       $photo = Photo::find_by_id($_GET['id']);
-      $pObj = new Photo(); 
-      $picture_path = $pObj->picture_path();
+      //$pObj = new Photo(); 
+      $picture_path = Photo::picture_path();
 
       if(isset($_POST['update'])){
        

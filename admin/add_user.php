@@ -22,9 +22,11 @@
           $user->password = $_POST['password'];
           $user->first_name = $_POST['first_name'];
           $user->last_name = $_POST['last_name'];
-
           $user->set_file($_FILES['user_image']);
-          $user->save_user_and_image();
+          $user->create();
+          $user->upload_photo();
+          $session->message("User {$user->first_name} {$user->last_name} has been added.");
+          redirect("users.php");
         }
       }
 

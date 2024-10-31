@@ -2,8 +2,8 @@
 
 <?php 
   $photos = Photo::find_all();
-  $pObj = new Photo(); 
-  $picture_path = $pObj->picture_path();
+  //$pObj = new Photo(); 
+  $picture_path = Photo::picture_path();
 ?>
 
 <!-- Photo Modal -->
@@ -25,14 +25,12 @@
 
                         <img 
                         class="modal_thumbnails img-responsive"
-                        src="<?php echo $picture_path.$photo->filename; ?>" 
+                        src="<?php echo $picture_path . $photo->filename; ?>" 
                         alt="<?php echo $photo->title; ?>" 
                         data="<?php echo $photo->id; ?>"
                         >
                       </a>
-                      <div class="photo-id hidden">
-
-                      </div>
+                      <div class="photo-id hidden"></div>
                     </div>
 
                  <?php endforeach; ?>

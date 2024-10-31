@@ -15,7 +15,7 @@ class Photo extends Db_object{
     public $size;
     public $tmp_path;
 
-    public $upload_directory = 'images';
+    public static $upload_directory = 'images/';
     public $errors = [];
     #    /*https://www.php.net/manual/en/features.file-upload.errors.php*/
     public $upload_errors_array = array(
@@ -56,9 +56,10 @@ class Photo extends Db_object{
       }
     }
 
-    public function picture_path(){
-      $picture_path = $this->upload_directory. DS;
-      return $picture_path;
+    public static function picture_path(){
+      //$picture_path = $this->upload_directory . DS;
+      //return $picture_path;
+      return self::$upload_directory;
     }
     public function save(){
 
@@ -73,7 +74,7 @@ class Photo extends Db_object{
           return false;
         }
 
-        $target_path = SITE_ROOT. DS . 'admin' . DS . $this->upload_directory . DS. $this->filename;
+        $target_path = SITE_ROOT. DS . 'admin' . DS . Self::picture_path() . DS. $this->filename;
         //die($target_path);
    
         if(file_exists($target_path)){
@@ -104,5 +105,20 @@ class Photo extends Db_object{
         return unlink($target_path) ? true : false;
         //die($target_path);
       }
+    }
+
+
+    public static function displa_sidebar_data($photo_id){
+
+      $photo = Photo::find_by_id($photo_id);
+
+      $output =  "<a class='' href='#'>";
+      $output .= "<img width='100' src='{$photo->picture_path()}{$photo->filename}'>";
+      $output .= "</a>";
+      $output .= "<p>{$photo->filename}</p>";
+      $output .= "<p>{$photo->type}</p>";
+      $output .= "<p>{$photo->size}</p>";
+      echo $output;
+      
     }
 }

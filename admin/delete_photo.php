@@ -21,8 +21,9 @@
     
     if($photo){
       $photo->delete_photo();
-      redirect('../photos.php');
+      redirect('photos.php');
+      $session->message("The {$photo->filename} has been deleted.");
     }else{
-      redirect('../photos.php');
+      redirect('photos.php');
     }
 ?>

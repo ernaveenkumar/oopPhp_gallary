@@ -20,7 +20,8 @@
     //die;
     
     if($user){
-      $user->delete();
+      $user->delete_photo();
+      $session->message("The {$user->username} has been deleted.");
       redirect('users.php');
     }else{
       redirect('users.php');

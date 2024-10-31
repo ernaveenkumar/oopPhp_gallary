@@ -5,11 +5,11 @@
         redirect('login.php');
     }
 
-    if(isset($_POST['submit'])){        
+    if(isset($_FILES['file'])){        
      
         $photo = new Photo();
         $photo->photo_title = $_POST['title'];
-        $photo->set_file($_FILES['file_upload']);
+        $photo->set_file($_FILES['file']);
 
         if($photo->save()){
             $message = "Photo uploaded";
@@ -56,6 +56,7 @@
                             </li>
                             <li class="active">
                                 <i class="fa fa-file">UPLOAD</i> 
+                                <h2><?php isset($the_message) ? $the_message : "" ?></h2>
 
                             </li>
                         </ol>
@@ -68,13 +69,21 @@
                             <input type="text" name="title" id="title" class="form-control">
                             <br />
                             <br />
-                            <input type ="file" name="file_upload"> <br /><br />
+                            <input type ="file" name="file"> <br /><br />
                             <input type="submit" name="submit">
                         </form>
                         <br />
-                        <h2><?php isset($the_message) ? $the_message : "" ?></h2>
+                        
+                       
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form action="upload.php" class="dropzone" id="my-awesome-dropzone">
+
+                        </form>
                     </div>
                 </div>
+            </div>
 
             </div>
             <!-- /.container-fluid -->

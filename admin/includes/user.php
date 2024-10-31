@@ -10,8 +10,8 @@ class User extends Db_object{
   public $first_name;
   public $last_name;
   public $filename;
-  public $upload_directory = "images";
-  public $image_placeholder = "http://placehold.it/400x400&text=image";
+  public static $upload_directory = "images/";
+  public static $image_placeholder = "http://placehold.it/400x400&text=image";
   //public $image_placeholder = "https://placehold.co/200x200/000000/FFF";
 
 
@@ -62,7 +62,7 @@ public $upload_errors_array = array(
 
 //Save method is copied from photo.php file and pasted here
 public function upload_photo(){
-
+ //die('ddddd');
 
     if(!empty($this->errors)){
       return false;
@@ -72,8 +72,8 @@ public function upload_photo(){
       return false;
     }
 
-    $target_path = SITE_ROOT. DS . 'admin' . DS . $this->upload_directory . DS. $this->filename;
-    //die($target_path);
+    $target_path = SITE_ROOT. DS . 'admin' . DS . $this->picture_path() . DS. $this->filename;
+   
 
     if(file_exists($target_path)){
       
@@ -94,14 +94,14 @@ public function upload_photo(){
 
 }
 
-  public function picture_path(){
-    $picture_path = $this->upload_directory. DS;
-    return $picture_path;
+  public static function picture_path(){
+    return self::$upload_directory;
+     
   }
 
 
-public function image_place_holder(){
-   return $this->image_placeholder;
+public static function image_place_holder(){
+   return self::$image_placeholder;
 } 
 
 public function image_path_and_placeholder(){
@@ -155,10 +155,53 @@ public function user_image_path(){
     $database->query($sql);
   
     echo $this->picture_path() . $this->filename;
-
-
-
   }
 
+
+  public function save_user_and_image(){
+
+    // $this->filename = $user_image;
+    // $this->id = $user_id;
+    // $this->save();
+    global $database;
+
+    $this->username = $database->escape_string($username);
+    $this->password = $database->escape_string($password);
+    $this->first_name = $database->escape_string($first_name);
+    $this->last_name = $database->escape_string($last_name);
+    $this->filename = $database->escape_string($filename);
+    $this->save();
+    $this->upload_photo();
+
+
+    // $sql = "UPDATE ". self::$db_table . " SET filename = '{$this->filename}'";
+    // $sql .= " WHERE id = '$this->id'";
+    // $database->query($sql);
+  
+    //echo $this->picture_path() . $this->filename;
+  }
+
+  public function photos(){
+    return self::find_this_query("SELECT * from photos where user_id = ". $this->id);
+  }
+
+
+  
+
+
+
+
+  
+
+
+  public function delete_photo(){
+
+    if($this->delete()){
+
+      $target_path = SITE_ROOT. DS . 'admin' . DS . $this->upload_directory . DS. $this->filename;
+      return unlink($target_path) ? true : false;
+      //die($target_path);
+    }
+  }
 
 }

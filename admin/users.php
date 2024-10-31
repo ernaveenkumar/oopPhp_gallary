@@ -11,9 +11,9 @@
 
 
     $users = User::find_all();
-    $uObj = new User(); 
-    $user_image_path = $uObj->picture_path();
-    $user_image_placeholder = $uObj->image_place_holder();
+    //$uObj = new User(); 
+    $user_image_path = User::picture_path();
+    $user_image_placeholder = User::image_place_holder();
     //die($user_image_path);
 ?>
         <!-- Navigation -->
@@ -43,6 +43,10 @@
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
+                        <p class="bg-success">
+                            <?php echo $session->message; ?>
+                            <?php echo "kil". $session->message(); ?>
+                        </p>
                         <h1 class="page-header">
                         Users
                             <small><a href="add_user.php" class="btn btn-primary"> add user</a></small>
